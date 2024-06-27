@@ -1,0 +1,62 @@
+# =====================================================================================================================
+# Code Owners - Explicit individuals or teams responsible for specified code in repository
+#
+# INSTRUCTIONS:
+# -------------
+# Every line is a a rule, a file pattern that is followed by one or more Code Owners, e.g. dir/pattern*/**   @Owner
+# Code Owners identifiers use Bitbucket's display name or nickname to identify owners (usually full name or fLast).
+#   - Hint: Type someone's name on a Bitbucket PR using '@', the popup shows both the display name and nickname
+#   - Example: "Andres Breton" or abreton
+#   - For clarity, try to use the full name when setting Code Owners, e.g. @"Andres Breton"
+#
+# Glob patterns with spaces must be enclosed in double quotes "", e.g. "path with spaces/*". This will be rare.
+#
+# Ordering is IMPORTANT! The last matching file pattern (for same file) has the highest precedence.
+# The users specified here are not the only ones that can be added as a reviewer. These are simply ones that the
+# system will automatically add. You can always add others when creating, or after creating a PR.
+#
+# =====================================================================================================================
+
+# ---------------------------------------------------------------------------------------------------------------------
+# GROUPS
+# Bitbucket groups (https://bitbucket.org/modernatx/workspace/settings/groups) can be utilized:
+#   - Group declarations need to start with '@@', e.g. @@GroupName
+#   - User and group names with spaces must be enclosed with double quotes "", e.g. @@"Group Name"
+# Custom Code Owners groups can be defined
+
+# Custom Groups
+@@@Admin                                                                    @"EXAMPLE_ADMIN_USER"
+@@@EXAMPLE_GROUP                                                            @"EXAMPLE_GROUP_USER"
+@@@DefaultReviewers                                                         @"EXAMPLE_DEFAULT_REVIEWER_USER"
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# FILES
+
+# Default Repo Owner (if not explicitly defined below)
+*                                                                           @@DefaultReviewers
+.github/**/**
+.editorconfig                                                               @@Admin
+bitbucket-pipelines.yml                                                     @@AID
+CODEOWNERS                                                                  @@Admin
+
+# ---------------------------------------------------------------------------------------------------------------------
+# DIRECTORIES
+
+# Client
+client/.husky/**                                                            @@AID
+client/.prettierignore                                                      @@AID
+client/.prettierrc                                                          @@AID
+
+# Server
+server/.dockerignore                                                        @@Admin
+server/Dockerfile                                                           @@Admin
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# * IMPORTANT: Resets Code Owners for package-lock.json modifications
+# The reason we want to do this is to limit adding reviewers to PRs if this is the only file modified.
+# The inherited risk is that any modifications to these files will not trigger reviewers in PRs, but the
+# benefits outweigh the risk, and this risk is mitigated by CI.
+# NOTE: Order is important and this should come _after_ Code Owner definitions above
+!**/package-lock.json

@@ -1,0 +1,27 @@
+# =====================================================================================================================
+# Example Module Publish - Example of running a github action for npm module publishing
+#
+# INSTRUCTIONS:
+# -------------
+# This file contains a brief example job specification of a GitHub Action workflow that publishes a module to npm.
+#
+# Github Actions is a CI/CD tool that allows you to automate your workflow.
+# This file is a part of the modernatx-repo-template repository.
+# The repository is a template for creating new repositories.
+# Find additional documentation and instructions in the README.md file, as well as the Cicada Wiki: https://modernatx.atlassian.net/wiki/spaces/EE/pages/756745086/Cicada+-+Documentation
+#
+# =====================================================================================================================
+
+name: Example Module build
+run-name: Example Module Build
+on:
+  push:
+    paths:
+      - '.github/workflows/example_module_build.yml'
+      - '.github/workflows/workflow_template_publish_module.yml'
+      - 'my-cool-module/**'
+jobs:
+  build_module_ix-app-infra-types:
+    uses: ./.github/workflows/workflow_template_publish_module.yml
+    with: 
+      MODULE_NAME: my-cool-module

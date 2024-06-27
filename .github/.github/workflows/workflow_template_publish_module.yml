@@ -1,0 +1,46 @@
+# =====================================================================================================================
+# Example Module Publish Workflow - Example of running a github action workflow for npm module publishing
+#
+# INSTRUCTIONS:
+# -------------
+# This file contains a brief example job specification of a GitHub Action workflow that publishes a module to npm.
+#
+# This file consumes inputs from the workflow_call event specified on a caller like `example_module_publish.yml`, which is triggered by the workflow_template_publish_module.yml file.
+#
+# - The RUNNER_LABEL input is optional and specifies the label of the runner to be used.
+# - The MODULE_NAME input is required and specifies the name of the module to be published.
+# - The STACK_ENV input is optional and specifies the environment to be used.
+#
+# The script then checks out the repository and runs the npm_publish.sh script to publish the module to npm.
+# the npm_publish.sh script is located in the /opt/runner/gha-runner/utils/scripts directory as part of the runner image.
+#
+# Github Actions is a CI/CD tool that allows you to automate your workflow.
+# This file is a part of the modernatx-repo-template repository.
+# The repository is a template for creating new repositories.
+# Find additional documentation and instructions in the README.md file, as well as the Cicada Wiki: https://modernatx.atlassian.net/wiki/spaces/EE/pages/756745086/Cicada+-+Documentation
+#
+# =====================================================================================================================
+
+
+name: Publish Module
+on:
+  workflow_call:
+    inputs:
+      RUNNER_LABEL:
+        type: string  ## EG: gha, ix-dev-github-cluster
+        default: gha 
+      MODULE_NAME:
+        required: true
+        type: string ## EG: ix-app-infra
+      STACK_ENV:
+        type: string
+        default: github
+jobs:
+  publish_module:
+    runs-on:
+      labels: ${{ inputs.RUNNER_LABEL }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          /opt/runner/gha-runner/utils/scripts/npm_publish.sh "pulumi/typescript/${{ inputs.MODULE_NAME }}"
+          
