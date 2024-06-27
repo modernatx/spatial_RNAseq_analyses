@@ -1,15 +1,6 @@
-# Moderna Github Enterprise Repository Template
+# Computational Analytical Code for Analyzing Spatial Transcriptomics Datasets
 
-## Cicada Documentation
+The code in this repository was used to generate analyses in the following research publication:
+Zhou, H., Negron, O., Abbondante, S., Marshall, M., Jones, B., Ong, E., ... & Gadjeva, M. (2024). Spatial transcriptomics identifies novel P. aeruginosa virulence factors. bioRxiv.
 
-Documentation for the Cicada project can be found here: [Cicada - Documentation](https://modernatx.atlassian.net/wiki/spaces/EE/pages/756745086/Cicada+-+Documentation)
-
-
-## Instructions
-
-Feel free to clone this template when starting a new project, and modify it to suit the specific needs of your project.
-
-This repository serves as a template for creating new repositories within our GitHub Enterprise organization. It includes standard configurations, best practices, and guidelines to ensure consistency and quality across all our projects.
-
-[]: # (README.md)
-This file serves as the main documentation for the project. It provides an overview of the project, instructions for cloning the template, and guidance on how to modify it for specific project needs.
+contact: Hao.Zhou@modernatx.com
